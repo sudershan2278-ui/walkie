@@ -1,0 +1,12 @@
+# One-click deploy on Render (render.com). Render provides HTTPS, which phones need for the mic.
+services:
+  - type: web
+    name: walkie
+    runtime: node
+    plan: starter
+    buildCommand: npm ci --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: ALLOWED_ORIGINS
+        sync: false

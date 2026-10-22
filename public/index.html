@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#2b2d31">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Walkie">
+  <title>Walkie</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="stage">
+    <nav class="side left" aria-label="Radio controls">
+      <button class="side-btn" id="btn-stop" type="button"><span class="ico ico-stop"></span>STOP ALL</button>
+      <button class="side-btn talk" id="btn-talk" type="button"><span class="ico ico-radio"></span>TALKIE</button>
+      <button class="side-btn" id="btn-play" type="button" disabled><span class="ico ico-play"></span>PLAY</button>
+      <button class="side-btn" id="btn-rec" type="button"><span class="ico ico-rec"></span>REC</button>
+    </nav>
+
+    <section class="radio" aria-label="Walkie-talkie">
+      <div class="antenna"></div>
+      <div class="body">
+        <div class="knob knob-a"></div>
+        <div class="knob knob-b"><span class="led" id="led"></span></div>
+        <button class="ptt-side" id="ptt-side" type="button" aria-label="Push to talk"></button>
+        <div class="grille"><span></span><span></span><span></span><span></span></div>
+        <div class="screen" id="screen">
+          <div class="status-bar">
+            <span class="bars" id="bars"><i></i><i></i><i></i><i></i></span>
+            <span id="lock" class="lock" title="End-to-end encrypted">🔒</span>
+            <span class="grow"></span>
+            <span id="latency">--</span>
+          </div>
+          <button class="allow" id="btn-allow" type="button">ALLOW MIC</button>
+          <div class="display" id="display" hidden>
+            <div class="ch">CH <span id="ch-num">01</span></div>
+            <div class="state" id="state">READY</div>
+            <div class="sub" id="sub">&nbsp;</div>
+          </div>
+          <div class="softkeys"><span>Menu</span><span>Settings</span></div>
+        </div>
+        <div class="nav-row">
+          <button class="key small" data-key="menu" type="button">P1</button>
+          <button class="dpad" data-key="ok" type="button" aria-label="OK"><span></span></button>
+          <button class="key small" data-key="settings" type="button">P2</button>
+        </div>
+        <div class="keypad">
+          <button class="key" data-key="1" type="button">1</button>
+          <button class="key" data-key="2" type="button">2<small>ABC</small></button>
+          <button class="key" data-key="3" type="button">3<small>DEF</small></button>
+          <button class="key" data-key="4" type="button">4<small>GHI</small></button>
+          <button class="key" data-key="5" type="button">5<small>JKL</small></button>
+          <button class="key" data-key="6" type="button">6<small>MNO</small></button>
+          <button class="key" data-key="7" type="button">7<small>PQRS</small></button>
+          <button class="key" data-key="8" type="button">8<small>TUV</small></button>
+          <button class="key" data-key="9" type="button">9<small>WXYZ</small></button>
+          <button class="key" data-key="down" type="button">◀</button>
+          <button class="key" data-key="0" type="button">0</button>
+          <button class="key" data-key="up" type="button">▶</button>
+        </div>
+      </div>
+      <p class="hint" id="hint">Tap “Allow mic” to begin</p>
+    </section>
+
+    <nav class="side right" aria-label="Sound effects">
+      <button class="side-btn" id="btn-lights" type="button"><span class="ico ico-lights"></span>LIGHTS</button>
+      <button class="side-btn" id="btn-wail" type="button"><span class="ico ico-wail"></span>WAIL</button>
+      <button class="side-btn" id="btn-siren" type="button"><span class="ico ico-siren"></span>SIRENS</button>
+      <button class="side-btn" id="btn-man" type="button"><span class="ico ico-man"></span>MAN</button>
+      <button class="side-btn" id="btn-horn" type="button"><span class="ico ico-horn"></span>HORN</button>
+    </nav>
+  </main>
+
+  <dialog id="settings">
+    <form method="dialog" id="settings-form">
+      <h2>Channel settings</h2>
+      <label>Your name
+        <input name="name" maxlength="20" autocomplete="nickname" required>
+      </label>
+      <label>Channel (1–99)
+        <input name="channel" type="number" min="1" max="99" inputmode="numeric" required>
+      </label>
+      <label>Channel passcode
+        <input name="passcode" type="password" minlength="6" maxlength="64" autocomplete="off" required>
+        <small>Everyone on the channel needs the same passcode. Audio is encrypted with it on your phone, so nobody else, including the server, can listen.</small>
+      </label>
+      <div class="actions">
+        <button value="cancel" type="submit" formnovalidate>Cancel</button>
+        <button value="save" type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
