@@ -3,7 +3,7 @@ services:
   - type: web
     name: walkie
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: npm ci --omit=dev
     startCommand: node server.js
     healthCheckPath: /healthz
